@@ -22,7 +22,7 @@ void enqueue(Queue* q, int value){
         return;
     }
 
-    Node* newNode = malloc(sizeof(Node));
+    NodeQ* newNode = malloc(sizeof(NodeQ));
     newNode->data = value;
     newNode->next = NULL;
 
@@ -41,7 +41,7 @@ int dequeue(Queue* q){
         return INT_MIN;
     }
 
-    Node* temp = q->head;
+    NodeQ* temp = q->head;
     int value = temp->data;
     
     q->head = temp->next;
@@ -62,7 +62,7 @@ void printQueue(Queue* q){
         return;
     }
 
-    Node* temp = q->head;
+    NodeQ* temp = q->head;
     for (int i = 0; i < q->size; ++i){
         printf("%d\n", temp->data);
         temp = temp->next;
@@ -71,10 +71,10 @@ void printQueue(Queue* q){
 }
 
 void freeQueue(Queue* q){
-    Node* temp = q->head;
+    NodeQ* temp = q->head;
 
     while(temp != NULL){
-        Node* next = temp->next;
+        NodeQ* next = temp->next;
         free(temp);
         temp = next;
     }

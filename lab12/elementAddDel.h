@@ -5,7 +5,10 @@
 #include "queue.h"
 #include "validators.h"
 #include <stdbool.h>
+#include "deque.h"
 
 void fillQueue(Queue* q);
 bool isEqualHeadAndValue(Queue* q, int value);
-void deleteAddMode(Queue* q);
+void deleteAddModeForQueue(Queue* q);
+void fillDeque(Deque* d);
+void deleteAddModeForDeque(Deque* d);

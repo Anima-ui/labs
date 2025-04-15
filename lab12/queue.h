@@ -1,14 +1,14 @@
 #pragma once
 #include <stdbool.h>
 
-typedef struct Node{
+typedef struct NodeQ{
     int data;
-    struct Node* next;
-} Node;
+    struct NodeQ* next;
+} NodeQ;
 
 typedef struct Queue{
-    Node* head;
-    Node* tail;
+    NodeQ* head;
+    NodeQ* tail;
     int size;
     int maxSize;
 } Queue;

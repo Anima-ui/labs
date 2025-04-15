@@ -1,5 +1,12 @@
 {
     "files.associations": {
-        "elementadd&del.h": "c"
+        "elementadd&del.h": "c",
+        "cstdlib": "c",
+        "array": "c",
+        "string_view": "c",
+        "format": "c",
+        "initializer_list": "c",
+        "span": "c",
+        "stdlib.h": "c"
     }
 }

@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include "deque.h"
 #include "validators.h"
 #include "elementAddDel.h"
+#include "isTwoQueueEqual.h"
 
-void menu(Queue* q) {
+void menuForQueue(Queue* q) {
     int choice;
 
     do {
@@ -18,10 +20,39 @@ void menu(Queue* q) {
         switch (choice) {
             case 1:
                 fillQueue(q);
-                deleteAddMode(q);
+                deleteAddModeForQueue(q);
                 break;
             case 2:
                 printQueue(q);
+                break;
+            case 3:
+                printf("Exiting menu...\n");
+                break;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
+
+    } while (choice != 3);
+}
+
+void menuForDeque(Deque* d) {
+    int choice;
+
+    do {
+        printf("\n--- Deque Menu ---\n");
+        printf("1. Fill the deque\n");
+        printf("2. Print the deque\n");
+        printf("3. Exit\n");
+
+        choice = getValidatedIntInput("Enter your choice: ");
+
+        switch (choice) {
+            case 1:
+                fillDeque(d);
+                deleteAddModeForDeque(d);
+                break;
+            case 2:
+                printDeque(d);
                 break;
             case 3:
                 printf("Exiting menu...\n");
@@ -48,18 +79,34 @@ int main() {
         switch (task) {
             case 1:
                 Queue* q = createQueue();
-                menu(q);
+                menuForQueue(q);
                 freeQueue(q);
                 break;
 
             case 2:
-                Queue* q2 = createQueue();
-                freeQueue(q2);
+                int maxSize = getValidatedIntInput("Input max size of deque: ");
+                Deque* d = createDeque(maxSize);
+                menuForDeque(d);
+                freeDeque(d);
                 break;
 
             case 3:
-                Queue* q3 = createQueue();
-                freeQueue(q3);
+                Queue* q1 = createQueue();
+                fillQueue(q1);
+                Queue* q2 = createQueue();
+                fillQueue(q2);
+
+                printQueue(q1);
+                printQueue(q2);
+
+                if (isQueueEqual(q1, q2)){
+                    printf("\nQueues are equal\n");
+                } else {
+                    printf("\nQueues are not equal\n");
+                }
+
+                freeQueue(q1);
+                freeQueue(q2);
                 break;
 
             case 4:
