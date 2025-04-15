@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "validators.h"
 #include "queue.h"
+#include <stdbool.h>
 
 
 Queue* createQueue(){
@@ -14,11 +15,10 @@ Queue* createQueue(){
     return q;
 }
 
-void enqueue(Queue* q){
-    int value = getValidatedIntInput("Input the value: ");
 
-    if (q->size >= q->maxSize){
-        printf("The queue is full");
+void enqueue(Queue* q, int value){
+    if (q->size >= q->maxSize) {
+        printf("Queue is full, cannot enqueue %d\n", value);
         return;
     }
 
@@ -26,36 +26,37 @@ void enqueue(Queue* q){
     newNode->data = value;
     newNode->next = NULL;
 
-    if (q->tail){
+    if (q->tail != NULL) {
         q->tail->next = newNode;
     } else {
         q->head = newNode;
     }
-
     q->tail = newNode;
     q->size++;
-
-    printf("Element %d was added to the queue\n", value);
 }
 
-void dequeue(Queue* q){
+int dequeue(Queue* q){
     if (q->head == NULL){
-        printf("The queue is empty");
-        return;
+        printf("The queue is empty\n");
+        return INT_MIN;
     }
 
     Node* temp = q->head;
+    int value = temp->data;
     
     q->head = temp->next;
     if (q->head == NULL)
         q->tail = NULL;
 
-    printf("The element %d was deleted\n", temp->data);
+    printf("The head %d was deleted\n", temp->data);
     free(temp);
     q->size--;
+
+    return value;
 }
 
 void printQueue(Queue* q){
+    printf("---------------Queue----------------\n");
     if (q->size == 0) {
         printf("The queue is empty\n");
         return;
@@ -66,6 +67,7 @@ void printQueue(Queue* q){
         printf("%d\n", temp->data);
         temp = temp->next;
     }
+    printf("---------------Queue----------------\n");
 }
 
 void freeQueue(Queue* q){
@@ -78,4 +80,8 @@ void freeQueue(Queue* q){
     }
 
     free(q);
+}
+
+bool isQueueEmpty(Queue* q){
+    return q->head == NULL;
 }

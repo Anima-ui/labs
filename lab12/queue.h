@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 
 typedef struct Node{
     int data;
@@ -13,7 +14,8 @@ typedef struct Queue{
 } Queue;
 
 Queue* createQueue();
-void enqueue(Queue* q);
-void dequeue(Queue* q);
+void enqueue(Queue* q, int value);
+int dequeue(Queue* q);
 void printQueue(Queue* q);
 void freeQueue(Queue* q);
+bool isQueueEmpty(Queue* q);
