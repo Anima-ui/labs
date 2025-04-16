@@ -10,6 +10,13 @@
         "stdlib.h": "c",
         "ctype.h": "c",
         "validators.h": "c",
-        "btree.h": "c"
+        "btree.h": "c",
+        "charconv": "c",
+        "optional": "c",
+        "system_error": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }

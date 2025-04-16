@@ -13,7 +13,7 @@ Node* createNode(double value){
 Node* insert(Node* root, double value){
     if (root == NULL) return createNode(value);
 
-    if (value < root->data){
+    if (value <= root->data){
         root->left = insert(root->left, value);
     } else if (value > root->data) {
         root->right = insert(root->right, value);
