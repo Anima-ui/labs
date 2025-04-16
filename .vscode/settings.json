@@ -9,6 +9,7 @@
         "span": "c",
         "stdlib.h": "c",
         "ctype.h": "c",
-        "validators.h": "c"
+        "validators.h": "c",
+        "btree.h": "c"
     }
 }

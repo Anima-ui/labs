@@ -13,8 +13,13 @@ int main(){
     root = insert(root, 4.0);
     root = insert(root, 6.0);
     root = insert(root, 8.0);
+    root = insert(root, 9.0);
 
     printf("Tree:\n");
+    printTree(root, 0);
+
+    root = deleteNode(root, 1);
+    root = deleteNode(root, 11);
     printTree(root, 0);
 
     freeTree(root);
