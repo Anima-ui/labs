@@ -23,9 +23,23 @@
 
 int sumStack(Stack * stack) {
     Node*temp = stack->Head;
+    int maxVal = temp->Val;
+
+    while (temp) {
+        if (temp->Val > maxVal) {
+            maxVal = temp->Val;
+        }
+        temp = temp->Prev;
+    }
+
     int sum = 0;
+    temp = stack->Head;
     while(temp) {
-        sum+=temp->Val;
+        if (temp->Val == maxVal) {
+            break;
+        }
+
+        sum += temp->Val;
         printf("Val summed: %d\n", temp->Val);
         temp = temp->Prev;
     }
