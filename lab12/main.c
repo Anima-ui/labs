@@ -1,4 +1,4 @@
-// Фалько 14.13.1025
+// Фалько 17.01.5785(по еврейскому календарю)
 
 //1)Создать очередь для целых чисел. Максимальный размер очереди вводится с экрана. Создать
 // функции для ввода и вывода элементов очереди. Ввести в очередь числа с экрана. После этого перейти
@@ -81,9 +81,9 @@ int main() {
 
     do{
         printf("Select task:\n");
-        printf("1. Task 1\n");
-        printf("2. Task 2\n");
-        printf("3. Task 3\n");
+        printf("1. Delete-add-mode for queue\n");
+        printf("2. Delete-add-mode for deque\n");
+        printf("3. Check if two queues are equal\n");
         printf("4. Exit programm\n");
 
         task = getValidatedIntInput("Enter task number (1-4): ");

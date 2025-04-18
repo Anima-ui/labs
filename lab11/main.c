@@ -1,4 +1,4 @@
-//Фалько 11.04.2025
+//Вариант 6      Фалько 11.04.2025
 //
 //1)Создать стек для целых чисел. Максимальный размер стека вводится с экрана. Найти сумму
 //до максимального элемента стека.
@@ -114,7 +114,8 @@ int main() {
     case '1':
         Stack * stack = newStack();
         FillStack(stack);
-        printf("Sum of stack els = %d\n", sumStack(stack));
+        PrintStack(stack);
+        printf("Sum of stack elements = %d\n", sumStack(stack));
         break;
     case '2':
         Stack * stacks1 = newStack();

@@ -38,7 +38,7 @@ Node* findMinRightSubtree(Node* root){
 
 Node* deleteNode(Node* root, double value){
     if (root == NULL) {
-        printf("Value %.2lf not found in the tree\n", value);
+        printf("Value %.0lf not found in the tree\n", value);
         return NULL;
     }
 
@@ -49,17 +49,17 @@ Node* deleteNode(Node* root, double value){
     } else {
         if (root->left == NULL && root->right == NULL){
             free(root);
-            printf("Value %.2f was deleted\n", value);
+            printf("Value %.0f was deleted\n", value);
             return NULL;
         } else if (root->left == NULL){
             Node* temp = root->right;
             free(root);
-            printf("Value %.2f was deleted\n", value);
+            printf("Value %.0f was deleted\n", value);
             return temp;
         } else if (root->right == NULL){
             Node* temp = root->left;
             free(root);
-            printf("Value %.2f was deleted\n", value);
+            printf("Value %.0f was deleted\n", value);
             return temp;
         } else {
             Node* minRightTree = findMinRightSubtree(root->right);
@@ -72,7 +72,9 @@ Node* deleteNode(Node* root, double value){
 }
 
 void printTree(Node* root, int space) {
-    if (root == NULL) return;
+    if (root == NULL){
+        return;
+    }
 
     int indent = 10;
     space += indent;
@@ -81,7 +83,25 @@ void printTree(Node* root, int space) {
 
     printf("\n");
     for (int i = indent; i < space; i++) printf(" ");
-    printf("%.2lf\n", root->data);
+    printf("%.0lf\n", root->data);
 
     printTree(root->left, space);
+}
+
+Node* createTree(){
+    Node* root = NULL;
+    printf("Enter numbers to insert into the tree. Type -1 to finish\n");
+
+    while (true){
+        int value = getValidatedIntInput("Input the element(-1 to exit): ");
+
+        if (value == -1){
+            break;
+        }
+
+        root = insert(root, value);
+    }
+    printf("Tree:\n");
+    printTree(root, 0);
+    return root;
 }
