@@ -7,3 +7,4 @@
 #define HEIGHT 10
 
 int count_neighbors(int field[HEIGHT][WIDTH], int x, int y, int type);
+void save_results_to_file(int field[HEIGHT][WIDTH], int generation_count);

@@ -1,0 +1,4 @@
+Generations: 83
+TYPE_A cells: 11
+TYPE_B cells: 0
+Winner: TYPE_A (@)
