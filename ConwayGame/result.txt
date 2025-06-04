@@ -1,4 +1,4 @@
-Generations: 83
-TYPE_A cells: 11
-TYPE_B cells: 0
-Winner: TYPE_A (@)
+Generations: 37
+TYPE_A cells: 4
+TYPE_B cells: 7
+Winner: TYPE_B (*)

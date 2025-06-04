@@ -5,7 +5,7 @@
 #include "utils.h"
 #include "../field/field.h"
 
-int count_neighbors(int field[HEIGHT][WIDTH], int x, int y, int type) {
+int count_neighbors(int field[HEIGHT][WIDTH], int x, int y, CellType type) {
     int count = 0;
     for (int dy = -1; dy <= 1; dy++) {
         for (int dx = -1; dx <= 1; dx++) {
@@ -21,6 +21,7 @@ int count_neighbors(int field[HEIGHT][WIDTH], int x, int y, int type) {
     }
     return count;
 }
+
 
 void save_results_to_file(int field[HEIGHT][WIDTH], int generation_count) {
     int count_a = 0;
