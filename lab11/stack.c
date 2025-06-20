@@ -3,8 +3,8 @@
 #include "validators.h"
 #include "stack.h"
 
-Stack * newStack() {
-    Stack * stack = malloc(sizeof(Stack));
+Stack* newStack() {
+    Stack* stack = malloc(sizeof(Stack));
     if (!stack) {
         perror("Failed to allocate memory for stack");
         exit(EXIT_FAILURE);
@@ -16,12 +16,12 @@ Stack * newStack() {
 }
 
 
-void Push(int val, Stack * stack) {
+void Push(int val, Stack* stack) {
     if(stack->Len >= stack->MaxLen) {
-        printf("Error: You have reached the maximum length of the stack\n");
+        printf("Error: You've reached the maximum length of the stack\n");
         return;
     }
-    Node * newNode = malloc(sizeof(Node));
+    Node* newNode = malloc(sizeof(Node));
     if (!newNode) {
         perror("Failed to allocate memory for new node");
         exit(EXIT_FAILURE);
@@ -37,11 +37,11 @@ void Push(int val, Stack * stack) {
     stack->Len++;
 }
 
-Node * Pop(Stack * stack) {
+Node* Pop(Stack* stack) {
     if (stack == NULL || stack->Head == NULL) {
         return NULL;
     }
-    Node * popped = stack->Head;
+    Node* popped = stack->Head;
     stack->Head = popped->Prev;
     if (stack->Head != NULL) {
         stack->Head->Next = NULL;
@@ -50,15 +50,28 @@ Node * Pop(Stack * stack) {
     return popped;
 }
 
-void PrintStack(Stack * stack) {
-    Node * temp = stack->Head;
+void PrintStack(Stack* stack) {
+    Node* temp = stack->Head;
     while (temp != NULL) {
         printf("%d\n", temp->Val);
         temp = temp->Prev;
     }
 }
 
-void FillStack(Stack * stack) {
+void freeStack(Stack* stack) {
+    if (!stack) return; 
+
+    Node* current = stack->Head;
+    while (current) {
+        Node* temp = current;
+        current = current->Prev;
+        free(temp); 
+    }
+
+    free(stack); 
+}
+
+void FillStack(Stack* stack) {
     int ftInt = getValidatedIntInput("Choose stack type:\n 0 - increasing,\n 1 - decreasing,\n 2 - chaotic\nEnter num: ");
     fillingType ft = (fillingType)ftInt;
     switch (ft)

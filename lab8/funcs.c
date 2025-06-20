@@ -119,7 +119,7 @@ void fileShift(FILE* file)
     if (count == 0 || k % count == 0) 
         return;
 
-    k = k % count; // Убираем лишние циклы
+    k = k % count; 
 
     int* numbers = malloc(fileSize);
 

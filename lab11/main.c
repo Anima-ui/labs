@@ -5,7 +5,7 @@
 //2)Создать два стека для целых чисел. Первый стек – организовать ввод по убыванию, второй
 // стек – организовать ввод по убыванию. Без сортировок и переворачивания исходных стеков
 // сформировать третий стек упорядоченный по возрастанию
-//1. В текстовом файле записаны строки – арифметические выражения. Числа – вещественные,
+//3) В текстовом файле записаны строки – арифметические выражения. Числа – вещественные,
 // знаки действий - -, +, *, / и скобки (). Используя работу со стеками найти значение каждого выражения
 // и записать в файл результатов. Если в исходном файле в строке есть ошибка – найти ее предполагаемую
 // позицию (позицию первой ошибки) и в выходной файл записать сообщение «Ошибка в позиции N»
@@ -22,7 +22,7 @@
 #include "Errors.h"
 
 int sumStack(Stack * stack) {
-    Node*temp = stack->Head;
+    Node* temp = stack->Head;
     int maxVal = temp->Val;
 
     while (temp) {
@@ -94,72 +94,85 @@ Stack* mergeStacks(Stack* s1, Stack* s2) {
         current = current->Prev;
     }
 
-
+    freeStack(tempStack);
     return mergedStack;
-}
-
-void ptrI(char * str) {
-    while(*str != '\0'){
-        printf("%c", *str);
-        str++;
-    }
 }
 
 
 int main() {
-    char validChars[3] = {'1', '2', '3'};
-    char choice = getValidatedCharInput("Choose the task:\n 1 - first task,\n 2 - second task,\n 3 - third task\n ", validChars, 3);
-    switch (choice)
-    {
-    case '1':
-        Stack * stack = newStack();
-        FillStack(stack);
-        PrintStack(stack);
-        printf("Sum of stack elements = %d\n", sumStack(stack));
-        break;
-    case '2':
-        Stack * stacks1 = newStack();
-        FillStack(stacks1);
-        Stack * stacks2 = newStack();
-        FillStack(stacks2);
-        Stack * mergedStack = mergeStacks(stacks1, stacks2);
-        PrintStack(mergedStack);
-        break;
-    case '3':
-        char* exprFileName = malloc(sizeof(char)*256);
-        char* resFileName = malloc(sizeof(char)*256);
-        printf("Insert expressions file name: ");
-        getFileName(exprFileName);
-        printf("\n");
-        printf("Insert res file name: ");
-        getFileName(resFileName);
-        FILE * fpExpr= fopen(exprFileName, "r");
-        FILE * fpRes= fopen(resFileName, "w+");
-        if (fpExpr == NULL || fpRes == NULL) {
-            printf("Error occured when opening file\n");
-            return 1;
-        }
-        char line[1024];
-        char * postfixStr = malloc(sizeof(char) * 1024);
-        int currLine = 0;
-        while(readLine(fpExpr, line)) {
-            currLine++;
-            errorsList * errors = convertInfixToPostfix(line, postfixStr, currLine);
-            if (isErrors(errors)) {
-                printErrors(errors);
-                continue;
+    char validChars[4] = {'0', '1', '2', '3'};
+    while (1) {
+        char choice = getValidatedCharInput(
+            "Choose the task:\n"
+            " 1 - Element sum,\n"
+            " 2 - Merge stacks,\n"
+            " 3 - RPN,\n"
+            " 0 - exit\n ",
+            validChars, 4);
+
+
+        switch (choice)
+        {
+        case '1':
+            Stack* stack = newStack();
+            FillStack(stack);
+            PrintStack(stack);
+            printf("Sum of stack elements = %d\n", sumStack(stack));
+            freeStack(stack);
+            break;
+        case '2':
+            Stack* stacks1 = newStack();
+            FillStack(stacks1);
+            Stack* stacks2 = newStack();
+            FillStack(stacks2);
+            Stack* mergedStack = mergeStacks(stacks1, stacks2);
+            PrintStack(mergedStack);
+            freeStack(stacks1);
+            freeStack(stacks2);
+            freeStack(mergedStack);
+            break;
+        case '3':
+            char* exprFileName = malloc(sizeof(char)*256);
+            char* resFileName = malloc(sizeof(char)*256);
+            printf("Insert expressions file name: ");
+            getFileName(exprFileName);
+            printf("\n");
+            printf("Insert res file name: ");
+            getFileName(resFileName);
+            FILE* fpExpr= fopen(exprFileName, "r");
+            FILE* fpRes= fopen(resFileName, "w+");
+            if (fpExpr == NULL || fpRes == NULL) {
+                printf("Error occured when opening file\n");
+                free(resFileName);
+                free(exprFileName);
+                return 1;
             }
-            float t = calcWithRPN(postfixStr);
-            writeLine(fpRes, t);
+            char line[1024];
+            char * postfixStr = malloc(sizeof(char) * 1024);
+            int currLine = 0;
+            while(readLine(fpExpr, line)) {
+                currLine++;
+                errorsList* errors = convertInfixToPostfix(line, postfixStr, currLine);
+                if (isErrors(errors)) {
+                    printErrors(errors);
+                    continue;
+                }
+                float t = calcWithRPN(postfixStr);
+                fprintf(fpRes, "%f\n", t);
+            }
+            free(postfixStr);
+            free(resFileName);
+            free(exprFileName);
+            fclose(fpExpr);
+            fclose(fpRes);
+            break;
+        case '0': {
+            printf("Exiting program...\n");
+            return 0;
         }
-        free(postfixStr);
-        free(resFileName);
-        free(exprFileName);
-        fclose(fpExpr);
-        fclose(fpRes);
-        break;
-    default:
-        printf("Error: incorect choice");
-        break;
+        default:
+            printf("Error: incorect choice");
+            break;
+        }
     }
 }

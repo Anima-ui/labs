@@ -17,13 +17,13 @@ int main() {
     const int max_generations = 1000;
 
     while (1) {
-        //system("cls");
+        system("cls");
         print_field(field);
         update_field(field);
         generation_count++;
         Sleep(200); // 200 миллисекунд
 
-        if (_kbhit()) { // если нажата клавиша
+        if (_kbhit()) { 
             break;
         }
 

@@ -4,23 +4,23 @@
 
 typedef struct Node{
     char val;
-    struct Node * next;
+    struct Node* next;
 }Node;
 
 typedef struct {
-    Node * head;
+    Node* head;
     int len;
 }OpsStack;
 
-OpsStack * newCharStack() {
-    OpsStack * newStack = malloc(sizeof(OpsStack));
+OpsStack* newCharStack() {
+    OpsStack* newStack = malloc(sizeof(OpsStack));
     newStack->head = malloc(sizeof(Node));
     newStack->len = 0;
     return newStack;
 }
 
-void printStack(OpsStack * stack) {
-    Node * temp = stack->head;
+void printStack(OpsStack* stack) {
+    Node* temp = stack->head;
     while(temp != NULL) {
         printf("%c", temp->val);
         temp = temp->next;        
@@ -28,8 +28,8 @@ void printStack(OpsStack * stack) {
     printf("\n");
 }
 
-void pushOp(char v, OpsStack * stack) {
-    Node * newOp = malloc(sizeof(Node));
+void pushOp(char v, OpsStack* stack) {
+    Node* newOp = malloc(sizeof(Node));
     newOp->val = v;
     newOp->next = stack->head;
     if (stack->len < 1) {
@@ -39,14 +39,14 @@ void pushOp(char v, OpsStack * stack) {
     stack->len++;
 }
 
-char popOp(OpsStack * stack) {
+char popOp(OpsStack* stack) {
     if(stack->len < 1) {
         return -1;
     }
     if (stack->head == NULL) {
         return -1;
     }
-    Node * temp;
+    Node* temp;
     if (stack->head->next == NULL) {
         temp = stack->head;
 
@@ -72,7 +72,7 @@ int isNum(char val) {
     }
 }
 
-Node * getHeadNode(OpsStack * stack) {
+Node* getHeadNode(OpsStack* stack) {
     return stack->head;
 }
 
@@ -102,8 +102,8 @@ static int isOperator(char c) {
 
 
 errorsList*  convertInfixToPostfix(char * infix, char * postfix, int currentLine) {
-    errorsList *errList = newErrorsList();
-    OpsStack * stack = newCharStack();
+    errorsList* errList = newErrorsList();
+    OpsStack* stack = newCharStack();
     int isPrevOp = 1;
     char *originalStart = infix;
     int currentIndex = 0;
@@ -127,7 +127,7 @@ errorsList*  convertInfixToPostfix(char * infix, char * postfix, int currentLine
             }
             *postfix = ' ';
             postfix++;
-            Node *headNode = stack->head;
+            Node* headNode = stack->head;
             switch (*infix)
             {
             case '(':
@@ -153,8 +153,7 @@ errorsList*  convertInfixToPostfix(char * infix, char * postfix, int currentLine
                 if (!isOperator(*infix)) {
                     errList = addError(errList, "Invalid symbol", currentIndex, currentLine);
                 }
-                while (stack->head != NULL && 
-                    getPrecedence(*infix) <= getPrecedence(stack->head->val)) {
+                while (stack->head != NULL && getPrecedence(*infix) <= getPrecedence(stack->head->val)) {
                     *postfix = popOp(stack);
                     postfix++;
                     *postfix = ' ';

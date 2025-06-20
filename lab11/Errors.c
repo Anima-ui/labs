@@ -19,6 +19,7 @@ error * newError(const char * text, int index, int line) {
     newError->index = index;
     newError->content = strdup(text);
     newError->line = line;
+    return newError;
 }
 
 errorsList * newErrorsList() {

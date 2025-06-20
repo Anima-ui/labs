@@ -16,6 +16,7 @@ typedef enum {
     DECREASING,
     CHAOTIC,
 } fillingType;
+void freeStack(Stack* stack);
 Stack * newStack();
 void Push(int val, Stack * stack);
 Node * Pop(Stack * stack);

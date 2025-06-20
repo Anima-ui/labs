@@ -43,12 +43,14 @@ float pop(NumsStack * stack) {
         float v = temp->val;
         stack->head = NULL;
         stack->len--;
+        free(temp);
         return v;
     } else {
         temp = stack->head;
         stack->head = temp->next;
         float poppedChar = temp->val;
         stack->len--;
+        free(temp);
         return poppedChar;
     }
 }
