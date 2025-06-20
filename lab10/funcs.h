@@ -1,4 +1,7 @@
 #pragma once
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 void getValidFilename(char* filename, size_t size);
 
 void validFileInput(FILE* file);
@@ -20,3 +23,5 @@ char* getFileNameFromCmdArgs(int argc, char* argv[]);
 int getValidatedIntInput(const char* message);
 
 char getValidatedCharInput(const char* message, char validChars[], int validCharsLength);
+
+void getStringInput(char* str, int size);

@@ -6,6 +6,15 @@
 #include <stdbool.h>
 #include "funcs.h"
 
+void getStringInput(char* str, int size) {
+    fgets(str, size, stdin);
+    str[strcspn(str, "\n")] = '\0';
+    if (strlen(str) == size - 1) {
+        char ch;
+        while ((ch = getchar()) != '\n' && ch != EOF);
+    }
+}
+
 void getValidFilename(char* filename, size_t size)
 {
     const char forbidden_chars[] = "<>:\"/\\|?*";
@@ -287,5 +296,33 @@ int getValidatedIntInput(const char* message)
             while ((getchar()) != '\n');
         }
     }
+}
 
+char getValidatedCharInput(const char *message, char validChars[], int validCharsLength)
+{
+    if(validCharsLength < 2) return 'M';
+    char input;
+    while (1) 
+    {
+        printf("%s", message);
+        if (scanf(" %c", &input) == 1) 
+        {
+            input = toupper(input);  
+            for (int i = 0; i < validCharsLength; i++) 
+            {
+                if (input == toupper(validChars[i])) 
+                {
+                    while (getchar() != '\n');
+                    return input;
+                }
+            }
+        }
+        printf("Invalid input. Please enter one of the following characters: ");
+        for (int i = 0; i < validCharsLength; i++) 
+        {
+            printf("%c ", validChars[i]);
+        }
+        printf("\n");
+        while (getchar() != '\n');  
+    }
 }
