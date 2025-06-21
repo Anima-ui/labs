@@ -10,7 +10,6 @@ typedef struct Queue{
     NodeQ* head;
     NodeQ* tail;
     int size;
-    int maxSize;
 } Queue;
 
 Queue* createQueue();

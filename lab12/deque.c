@@ -4,26 +4,20 @@
 #include "validators.h"
 #include "deque.h"
 
-Deque* createDeque(int maxSize){
+Deque* createDeque() {
     Deque* d = malloc(sizeof(Deque));
     d->front = d->rear = NULL;
     d->size = 0;
-    d->maxSize = maxSize;
     return d;
 }
 
-void pushFront(Deque* d, int value){
-    if (d->size >= d->maxSize) {
-        printf("Deque is full\n");
-        return;
-    }
-
+void pushFront(Deque* d, int value) {
     NodeD* newNode = malloc(sizeof(NodeD));
     newNode->data = value;
     newNode->prev = NULL;
     newNode->next = d->front;
 
-    if (d->front == NULL){
+    if (d->front == NULL) {
         d->rear = newNode;
     } else {
         d->front->prev = newNode;
@@ -33,18 +27,13 @@ void pushFront(Deque* d, int value){
     d->size++;
 }
 
-void pushRear(Deque* d, int value){
-    if (d->size >= d->maxSize) {
-        printf("Deque is full\n");
-        return;
-    }
-
+void pushRear(Deque* d, int value) {
     NodeD* newNode = malloc(sizeof(NodeD));
     newNode->data = value;
     newNode->prev = d->rear;
     newNode->next = NULL;
 
-    if (d->rear == NULL){
+    if (d->rear == NULL) {
         d->front = newNode;
     } else {
         d->rear->next = newNode;

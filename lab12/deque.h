@@ -11,10 +11,9 @@ typedef struct Deque{
     NodeD* front;
     NodeD* rear;
     int size;
-    int maxSize;
 } Deque;
 
-Deque* createDeque(int maxSize);
+Deque* createDeque();
 void pushFront(Deque* d, int value);
 void pushRear(Deque* d, int value);
 int popBack(Deque* d);

@@ -6,22 +6,16 @@
 #include <stdbool.h>
 
 
-Queue* createQueue(){
+Queue* createQueue() {
     Queue* q = malloc(sizeof(Queue));
     q->head = NULL;
     q->tail = NULL;
     q->size = 0;
-    q->maxSize = getValidatedIntInput("Enter max size of queue: ");
     return q;
 }
 
 
-void enqueue(Queue* q, int value){
-    if (q->size >= q->maxSize) {
-        printf("Queue is full, cannot enqueue %d\n", value);
-        return;
-    }
-
+void enqueue(Queue* q, int value) {
     NodeQ* newNode = malloc(sizeof(NodeQ));
     newNode->data = value;
     newNode->next = NULL;
@@ -31,6 +25,7 @@ void enqueue(Queue* q, int value){
     } else {
         q->head = newNode;
     }
+
     q->tail = newNode;
     q->size++;
 }

@@ -17,9 +17,9 @@ typedef enum {
     CHAOTIC,
 } fillingType;
 void freeStack(Stack* stack);
-Stack * newStack();
-void Push(int val, Stack * stack);
-Node * Pop(Stack * stack);
-void PrintStack(Stack * stack);
-void FillStack(Stack * stack);
+Stack* newStack();
+void Push(int val, Stack* stack);
+Node* Pop(Stack* stack);
+void PrintStack(Stack* stack);
+void FillStack(Stack* stack);
 #endif

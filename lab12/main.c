@@ -96,8 +96,7 @@ int main() {
                 break;
 
             case 2:
-                int maxSize = getValidatedIntInput("Input max size of deque: ");
-                Deque* d = createDeque(maxSize);
+                Deque* d = createDeque();
                 menuForDeque(d);
                 freeDeque(d);
                 break;
